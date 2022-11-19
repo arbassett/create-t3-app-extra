@@ -1,0 +1,29 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "commander": "^9.4.1",
+    "execa": "^6.1.0",
+    "fs-extra": "^10.1.0",
+    "gradient-string": "^2.0.2",
+    "ora": "^6.1.2",
+    "sort-package-json": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/gradient-string": "^1.1.2",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.11.9",
+    "tsup": "^6.5.0",
+    "type-fest": "^3.2.0"
+  }
+}
