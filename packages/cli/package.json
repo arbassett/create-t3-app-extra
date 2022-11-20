@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +18,7 @@
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
     "gradient-string": "^2.0.2",
+    "inquirer": "^9.1.4",
     "ora": "^6.1.2",
     "sort-package-json": "^2.1.0"
   },
