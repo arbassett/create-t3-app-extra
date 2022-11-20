@@ -5,7 +5,7 @@ import { renderTitle } from "./utils/renderTitle";
 const main = async () => {
   renderTitle();
 
-  await runCli();
+  const cliResult = await runCli();
 };
 
 main().catch((err) => {
