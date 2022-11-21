@@ -1,5 +1,5 @@
-import { InstallerMap, Packages } from "../types";
-import { packages as viteClientPacakges } from "../vite:client";
+import { InstallerMap, Packages } from "../types.js";
+import { packages as viteClientPacakges } from "../vite:client/index.js";
 
 export const packages = [...viteClientPacakges, "prisma"] as const satisfies Packages;;
 export type ViteServerPackages = typeof packages;

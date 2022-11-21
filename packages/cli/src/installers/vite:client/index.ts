@@ -1,4 +1,4 @@
-import { InstallerMap, Packages } from "../types";
+import { InstallerMap, Packages } from "../types.js";
 
 export const packages = ["trpc" ,"nextAuth", "tailwind"] as const satisfies Packages;
 export type ViteClientPackages = typeof packages;
