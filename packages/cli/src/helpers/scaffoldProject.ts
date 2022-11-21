@@ -34,7 +34,7 @@ export const scaffoldProject = async ({
   projectDir,
   pkgManager,
   noInstall,
-}: InstallerOptions) => {
+}: InstallerOptions<"vite:client" | "vite:server">) => {
   const srcDir = path.join(PKG_ROOT, "templates/vite:base");
 
   if (!noInstall) {

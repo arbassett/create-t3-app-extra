@@ -1,9 +1,8 @@
 import { Command } from "commander";
 import inquirer from "inquirer";
-import { CREATE_T3_VITE_APP, DEFAULT_APP_NAME } from "~/consts";
-import { frameworkPackages, Frameworks } from "~/installers/index";
-import { Packages } from "~/installers/types";
-import { validateAppName } from "~/utils/validateAppName";
+import { CREATE_T3_VITE_APP, DEFAULT_APP_NAME } from "~/consts.js";
+import { frameworkPackages, Frameworks, Packages } from "~/installers/index.js";
+import { validateAppName } from "~/utils/validateAppName.js";
 
 interface CLIResult<T extends Frameworks> {
   appName: string;

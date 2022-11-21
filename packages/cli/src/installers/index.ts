@@ -1,6 +1,9 @@
+import chalk from "chalk";
+import ora from "ora";
 import type { PackageManager } from "~/utils/getUserPkgManager.js";
-import { packages as viteClientPacakges } from "./vite:client/index.js";
-import { packages as viteServerPacakges } from "./vite:server/index.js";
+import { logger } from "~/utils/logger.js";
+import { generateInstallerMap as generateViteClientInstallerMap, packages as viteClientPacakges } from "./vite:client/index.js";
+import { generateInstallerMap as generateViteServerInstallerMap, packages as viteServerPacakges } from "./vite:server/index.js";
 
 export const frameworks = ["vite:client", "vite:server"] as const;
 
@@ -20,6 +23,7 @@ export type Installer<T extends Frameworks> = (
 export interface InstallerOptions<T extends Frameworks> {
   projectDir: string;
   pkgManager: PackageManager;
+  framework: T;
   packages: typeof frameworkPackages[T];
   noInstall: boolean;
   projectName?: string;
@@ -62,3 +66,34 @@ export const dependencyVersionMap = {
   superjson: "1.9.1",
 } as const;
 export type AvailableDependencies = keyof typeof dependencyVersionMap;
+
+const getInsallterMap = (opts: InstallerOptions<'vite:client'> | InstallerOptions<'vite:server'>): InstallerMap<'vite:client'> | InstallerMap<'vite:server'> => {
+  switch(opts.framework){
+    case 'vite:client':
+      return generateViteClientInstallerMap(opts.packages)
+    case 'vite:server':
+      return generateViteServerInstallerMap(opts.packages)
+  }
+}
+
+export const installPackages:Installer<'vite:client' |'vite:server'> = (opts) => {
+
+  const installerMap = getInsallterMap(opts);
+
+  logger.info("Adding boilerplate...");
+
+  for (const [name, pkgOpts] of Object.entries(installerMap)) {
+    if (pkgOpts.inUse) {
+      const spinner = ora(`Boilerplating ${name}...`).start();
+      pkgOpts.installer(opts);
+      spinner.succeed(
+        chalk.green(
+          `Successfully setup boilerplate for ${chalk.green.bold(name)}`,
+        ),
+      );
+    }
+  }
+
+  logger.info("");
+
+}
