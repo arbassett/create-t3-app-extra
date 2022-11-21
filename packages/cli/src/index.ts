@@ -5,7 +5,11 @@ import { initializeGit } from "./helpers/git.js";
 import { installDependencies } from "./helpers/installDependencies.js";
 import { logNextSteps } from "./helpers/logNextSteps.js";
 import { scaffoldProject } from "./helpers/scaffoldProject.js";
-import { Frameworks, installPackages } from "./installers/index.js";
+import {
+  Frameworks,
+  InstallerOptions,
+  installPackages,
+} from "./installers/index.js";
 import { getUserPkgManager } from "./utils/getUserPkgManager.js";
 import { logger } from "./utils/logger.js";
 import { parseNameAndPath } from "./utils/parseNameAndPath.js";
@@ -29,36 +33,32 @@ const main = async () => {
   const pkgManager = getUserPkgManager();
   const projectDir = path.resolve(process.cwd(), appDir);
 
-  // Bootstraps the base Next.js application
-  await scaffoldProject({
+  const installOptions: InstallerOptions<"vite:client" | "vite:server"> = {
     projectName: appDir,
     projectDir,
     pkgManager,
-    noInstall: false,
+    noInstall: cliResult.flags.noInstall,
     framework: cliResult.framework,
     packages: cliResult.packages,
-  });
+  };
+
+  // Bootstraps the base application
+  await scaffoldProject(installOptions);
 
   if (cliResult.packages.length > 0) {
-    await installPackages({
-      projectName: appDir,
-      projectDir,
-      pkgManager,
-      noInstall: false,
-      framework: cliResult.framework,
-      packages: cliResult.packages,
-    });
+    await installPackages(installOptions);
   }
 
-  //TODO: allow noInstall & no git init
-  await installDependencies({ projectDir });
-
-  await initializeGit(projectDir);
-
+  if (cliResult.flags.noInstall) {
+    await installDependencies({ projectDir });
+  }
+  if (cliResult.flags.noGit) {
+    await initializeGit(projectDir);
+  }
   logNextSteps({
     projectName: appDir,
     packages: cliResult.packages,
-    noInstall: false,
+    noInstall: cliResult.flags.noInstall,
   });
 
   // Write name to package.json
