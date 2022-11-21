@@ -83,13 +83,13 @@ const promptFramework = async () => {
     message: "What framework do you want to use?",
     choices: [
       { name: "Vite Client", value: "vite:client", short: "Vite Client" },
-      {
-        name: "Vite Client & Server",
-        value: "vite:server",
-        short: "Vite Server",
-      },
+      // {
+      //   name: "Vite Client & Server",
+      //   value: "vite:server",
+      //   short: "Vite Server",
+      // },
     ],
-    default: "typescript",
+    default: "vite:client",
   });
   return framework;
 };
