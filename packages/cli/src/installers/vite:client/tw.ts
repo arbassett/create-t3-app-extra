@@ -2,12 +2,22 @@ import fs from "fs-extra";
 import jsc from "jscodeshift";
 import path from "path";
 import { PKG_ROOT } from "~/consts.js";
+import { addPackageDependency } from "~/utils/addPackageDependency.js";
 import { Installer } from "../index.js";
 
-export const tailwindInstaller: Installer<"vite:client"> = ({
-  projectDir,
-  projectName,
-}) => {
+export const tailwindInstaller: Installer<"vite:client"> = ({ projectDir }) => {
+  addPackageDependency({
+    projectDir,
+    dependencies: [
+      "tailwindcss",
+      "postcss",
+      "autoprefixer",
+      "prettier",
+      "prettier-plugin-tailwindcss",
+    ],
+    devMode: true,
+  });
+
   const twAssetDir = path.join(PKG_ROOT, "templates/vite:client/tw");
 
   const indexRoutePath = path.join(projectDir, "src/routes/index.tsx");
