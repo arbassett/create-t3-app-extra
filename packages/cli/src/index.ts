@@ -1,6 +1,7 @@
 import path from "path";
 import { runCli } from "./cli/index.js";
 import { scaffoldProject } from "./helpers/scaffoldProject.js";
+import { tailwindInstaller } from "./installers/vite:client/tw.js";
 import { getUserPkgManager } from "./utils/getUserPkgManager.js";
 import { logger } from "./utils/logger.js";
 import { parseNameAndPath } from "./utils/parseNameAndPath.js";
@@ -17,6 +18,13 @@ const main = async () => {
 
   // Bootstraps the base Next.js application
   await scaffoldProject({
+    projectName: appDir,
+    projectDir,
+    pkgManager,
+    noInstall: false,
+  });
+
+  tailwindInstaller({
     projectName: appDir,
     projectDir,
     pkgManager,
