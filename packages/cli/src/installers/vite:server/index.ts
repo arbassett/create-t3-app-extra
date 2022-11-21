@@ -6,7 +6,7 @@ export type ViteServerPackages = typeof packages;
 
 export const generateInstallerMap = (
   packages: ViteServerPackages,
-): InstallerMap<ViteServerPackages> => ({
+): InstallerMap<'vite:server'> => ({
   prisma: {
     inUse: packages.includes("prisma"),
     // eslint-disable-next-line @typescript-eslint/no-empty-function

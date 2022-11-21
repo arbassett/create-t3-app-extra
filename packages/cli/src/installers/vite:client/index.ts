@@ -6,7 +6,7 @@ export type ViteClientPackages = typeof packages;
 
 export const generateInstallerMap = (
   packages: ViteClientPackages,
-): InstallerMap<ViteClientPackages> => ({
+): InstallerMap<'vite:client'> => ({
   nextAuth: {
     inUse: packages.includes("nextAuth"),
     // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -25,10 +25,10 @@ export interface InstallerOptions<T extends Frameworks> {
   projectName?: string;
 }
 
-export type InstallerMap<T extends Packages> = {
-  [pkg in T[number]]: {
+export type InstallerMap<T extends Frameworks> = {
+  [pkg in typeof frameworkPackages[T][number]]: {
     inUse: boolean;
-    installer: Installer;
+    installer: Installer<T>;
   };
 };
 
