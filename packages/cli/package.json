@@ -17,8 +17,8 @@
     "start": "node dist/index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Aaron Bassett <arbassett4@outlook.com>",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
