@@ -31,3 +31,34 @@ export type InstallerMap<T extends Packages> = {
     installer: Installer;
   };
 };
+
+/*
+ * This maps the necessary packages to a version.
+ * This improves performance significantly over fetching it from the npm registry.
+ * TODO: find a better way to seperate this to each installer
+ */
+export const dependencyVersionMap = {
+  // NextAuth.js
+  "next-auth": "^4.15.1",
+  "@next-auth/prisma-adapter": "^1.0.4",
+
+  // Prisma
+  prisma: "^4.5.0",
+  "@prisma/client": "^4.5.0",
+
+  // TailwindCSS
+  tailwindcss: "^3.2.0",
+  autoprefixer: "^10.4.7",
+  postcss: "^8.4.14",
+  prettier: "^2.7.1",
+  "prettier-plugin-tailwindcss": "^0.1.13",
+
+  // tRPC
+  "@trpc/client": "10.0.0-rc.4",
+  "@trpc/server": "10.0.0-rc.4",
+  "@trpc/react-query": "10.0.0-rc.4",
+  "@trpc/next": "10.0.0-rc.4",
+  "@tanstack/react-query": "^4.10.0",
+  superjson: "1.9.1",
+} as const;
+export type AvailableDependencies = keyof typeof dependencyVersionMap;
