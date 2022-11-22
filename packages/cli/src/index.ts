@@ -49,10 +49,10 @@ const main = async () => {
     await installPackages(installOptions);
   }
 
-  if (cliResult.flags.noInstall) {
+  if (!cliResult.flags.noInstall) {
     await installDependencies({ projectDir });
   }
-  if (cliResult.flags.noGit) {
+  if (!cliResult.flags.noGit) {
     await initializeGit(projectDir);
   }
   logNextSteps({
