@@ -35,6 +35,7 @@
   "dependencies": {
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
+    "@codeshift/utils": "^0.1.5",
     "chalk": "^5.1.2",
     "commander": "^9.4.1",
     "execa": "^6.1.0",

@@ -1,4 +1,5 @@
 import type { InstallerMap, Packages } from "../index.js";
+import { trpcInstaller } from "./trpc.js";
 import { tailwindInstaller } from "./tw.js";
 
 export const packages = ["trpc", "nextAuth", "tailwind"] as const satisfies Packages;;
@@ -20,6 +21,6 @@ export const generateInstallerMap = (
   trpc: {
     inUse: packages.includes("trpc"),
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    installer: () => {},
+    installer: trpcInstaller,
   },
 });

@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': ^7.20.2
   '@babel/preset-env': ^7.20.2
+  '@codeshift/utils': ^0.1.5
   '@types/fs-extra': ^9.0.13
   '@types/gradient-string': ^1.1.2
   '@types/inquirer': ^9.0.3
@@ -23,6 +24,7 @@ specifiers:
 dependencies:
   '@babel/core': 7.20.2
   '@babel/preset-env': 7.20.2_@babel+core@7.20.2
+  '@codeshift/utils': 0.1.5
   chalk: 5.1.2
   commander: 9.4.1
   execa: 6.1.0
@@ -1272,6 +1274,10 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+    dev: false
+
+  /@codeshift/utils/0.1.5:
+    resolution: {integrity: sha512-FzV/s48jTG5SH1Pf/FqmLmQid0HbxmCl2JnbB/Dfl7zRVfp4tj1LbRMwEUl4VH/BOrrmTXmHD5c6M/xY1ObhrQ==}
     dev: false
 
   /@esbuild/android-arm/0.15.14:
