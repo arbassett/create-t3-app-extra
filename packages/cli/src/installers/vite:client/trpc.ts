@@ -9,10 +9,7 @@ import {
 import { PKG_ROOT } from "~/consts.js";
 import { addPackageDependency } from "~/utils/addPackageDependency.js";
 import { Installer } from "../index.js";
-
-//TODO: can we type this better than any?
-const getObjectProperties = (source: string): jsc.ObjectProperty[] =>
-  jsc(source).find(jsc.ObjectExpression).get().node.properties;
+import { getObjectProperties } from "../utils.js";
 
 export const trpcInstaller: Installer<"vite:client"> = ({
   projectDir,
@@ -230,7 +227,7 @@ export const trpcInstaller: Installer<"vite:client"> = ({
         jsc.objectExpression([
           ...oe.node.properties,
           ...getObjectProperties(
-            "({VITE_API_URL: z.string().url().optional()})",
+            "({VITE_API_URL: z.string().url().optional(), VITE_DEV_API_PORT: z.string().optional()})",
           ),
         ]),
       );
@@ -248,7 +245,7 @@ export const trpcInstaller: Installer<"vite:client"> = ({
         jsc.objectExpression([
           ...oe.node.properties,
           ...getObjectProperties(
-            "({VITE_API_URL: import.meta.env.VITE_API_URL || (import.meta.env.VITE_DEV_API_PORT && `http://localhost:${import.meta.env.VITE_DEV_API_PORT}`)})",
+            "({VITE_API_URL: import.meta.env.VITE_API_URL, VITE_DEV_API_PORT: import.meta.VITE_DEV_API_PORT})",
           ),
         ]),
       );

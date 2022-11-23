@@ -7,6 +7,7 @@ import { env } from "../env/client.mjs";
 
 export const getBaseUrl = () => {
   if (env.VITE_API_URL) return env.VITE_API_URL;
+  if (env.VITE_DEV_API_PORT) return `http://localhost:${env.VITE_DEV_API_PORT}`;
   return ""; // browser should use relative url
 };
 
