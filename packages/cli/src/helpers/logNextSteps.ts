@@ -14,20 +14,11 @@ export const logNextSteps = ({
 >) => {
   const pkgManager = getUserPkgManager();
 
-  if (packages.includes("trpc")) {
-    logger.info("TRPC:");
-    logger.info("  spin up a create-t3-app on port 3000 for api access");
-    logger.info("  you may have to setup cors\n");
-  }
-
-  if (packages.includes("nextAuth")) {
-    logger.info("NextAuth:");
-    logger.warn(
-      "  NextAuth installer is active but runtime is not fully setup\n",
-    );
-  }
-
   logger.info("Next steps:");
+  if (packages.includes("trpc") || packages.includes("nextAuth")) {
+    logger.info("  spin up a create-t3-app on port 3000 for api access\n");
+  }
+
   projectName !== "." && logger.info(`  cd ${projectName}`);
   if (noInstall) {
     // To reflect yarn's default behavior of installing packages when no additional args provided
