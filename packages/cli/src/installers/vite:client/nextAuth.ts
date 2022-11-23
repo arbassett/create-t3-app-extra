@@ -77,6 +77,42 @@ export const nextAuthInstaller: Installer<"vite:client"> = ({
       );
     });
 
+  if (!packages.includes("trpc")) {
+    viteCOnfigFile
+      .find(
+        jsc.CallExpression,
+        (ce) =>
+          ce.callee.type === "Identifier" && ce.callee.name === "defineConfig",
+      )
+      .find(jsc.ObjectExpression)
+      .at(0)
+      .forEach((oe) => {
+        jsc(oe).replaceWith(
+          jsc.objectExpression([
+            ...oe.node.properties,
+            jsc.objectProperty(
+              jsc.identifier("server"),
+              jsc.objectExpression([
+                jsc.objectProperty(
+                  jsc.identifier("proxy"),
+                  jsc.objectExpression([
+                    jsc.objectProperty(
+                      jsc.stringLiteral("/api"),
+                      jsc.objectExpression([
+                        ...getObjectProperties(
+                          "({target: 'http://localhost:3000',changeOrigin: true})",
+                        ),
+                      ]),
+                    ),
+                  ]),
+                ),
+              ]),
+            ),
+          ]),
+        );
+      });
+  }
+
   if (packages.includes("trpc")) {
     const indexRoutePath = path.join(projectDir, "src/routes/index.tsx");
     const indexRouteFile = jsc(fs.readFileSync(indexRoutePath, "utf-8"));

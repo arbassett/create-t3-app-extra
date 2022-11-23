@@ -250,6 +250,44 @@ export const trpcInstaller: Installer<"vite:client"> = ({
         ]),
       );
     });
+
+  const viteConfigPath = path.join(projectDir, "vite.config.ts");
+  const viteCOnfigFile = jsc(fs.readFileSync(viteConfigPath, "utf-8"));
+
+  viteCOnfigFile
+    .find(
+      jsc.CallExpression,
+      (ce) =>
+        ce.callee.type === "Identifier" && ce.callee.name === "defineConfig",
+    )
+    .find(jsc.ObjectExpression)
+    .at(0)
+    .forEach((oe) => {
+      jsc(oe).replaceWith(
+        jsc.objectExpression([
+          ...oe.node.properties,
+          jsc.objectProperty(
+            jsc.identifier("server"),
+            jsc.objectExpression([
+              jsc.objectProperty(
+                jsc.identifier("proxy"),
+                jsc.objectExpression([
+                  jsc.objectProperty(
+                    jsc.stringLiteral("/api"),
+                    jsc.objectExpression([
+                      ...getObjectProperties(
+                        "({target: 'http://localhost:3000', changeOrigin: true})",
+                      ),
+                    ]),
+                  ),
+                ]),
+              ),
+            ]),
+          ),
+        ]),
+      );
+    });
+
   fs.copySync(
     path.join(trpcAssetDir, "utils"),
     path.join(projectDir, "src/utils"),
@@ -257,4 +295,5 @@ export const trpcInstaller: Installer<"vite:client"> = ({
   fs.writeFileSync(appPath, appFile.toSource());
   fs.writeFileSync(indexRoutePath, indexRouteFile.toSource());
   fs.writeFileSync(envSchemaPath, envSchemaFile.toSource());
+  fs.writeFileSync(viteConfigPath, viteCOnfigFile.toSource());
 };
