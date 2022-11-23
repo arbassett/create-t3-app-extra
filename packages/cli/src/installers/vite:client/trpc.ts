@@ -227,7 +227,7 @@ export const trpcInstaller: Installer<"vite:client"> = ({
         jsc.objectExpression([
           ...oe.node.properties,
           ...getObjectProperties(
-            "({VITE_API_URL: z.string().url().optional(), VITE_DEV_API_PORT: z.string().optional()})",
+            "({VITE_API_URL: z.string().url().optional()})",
           ),
         ]),
       );
@@ -245,7 +245,7 @@ export const trpcInstaller: Installer<"vite:client"> = ({
         jsc.objectExpression([
           ...oe.node.properties,
           ...getObjectProperties(
-            "({VITE_API_URL: import.meta.env.VITE_API_URL, VITE_DEV_API_PORT: import.meta.VITE_DEV_API_PORT})",
+            "({VITE_API_URL: import.meta.env.VITE_API_URL})",
           ),
         ]),
       );
