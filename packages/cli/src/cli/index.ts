@@ -11,16 +11,14 @@ import { validateAppName } from "~/utils/validateAppName.js";
 interface CLIFlags {
   noInstall: boolean;
   noGit: boolean;
+  noFormat: boolean;
 }
 
 interface CLIResult<T extends Frameworks> {
   appName: string;
   framework: T;
   packages: typeof frameworkPackages[T];
-  flags: {
-    noInstall: boolean;
-    noGit: boolean;
-  };
+  flags: CLIFlags;
 }
 
 export type CliResults = CLIResult<"vite:client" | "vite:server">;
@@ -38,6 +36,11 @@ export const runCli = async (): Promise<CliResults> => {
     .option(
       "--noInstall",
       "Explicitly tell the CLI to not run the package manager's install command",
+      false,
+    )
+    .option(
+      "--noFormat",
+      "Explicitly tell the CLI to not run eslint --fix",
       false,
     )
     .version(getVersion(), "-v, --version", "Display the version number")

@@ -17,6 +17,7 @@ specifiers:
   inquirer: ^9.1.4
   jscodeshift: ^0.14.0
   ora: ^6.1.2
+  prettier: ^2.7.1
   sort-package-json: ^2.1.0
   tsup: ^6.5.0
   type-fest: ^3.2.0
@@ -33,6 +34,7 @@ dependencies:
   inquirer: 9.1.4
   jscodeshift: 0.14.0_@babel+preset-env@7.20.2
   ora: 6.1.2
+  prettier: 2.8.0
   sort-package-json: 2.1.0
 
 devDependencies:
@@ -2629,6 +2631,12 @@ packages:
       lilconfig: 2.0.6
       yaml: 1.10.2
     dev: true
+
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: false
 
   /punycode/2.1.1:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}

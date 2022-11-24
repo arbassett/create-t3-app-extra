@@ -16,6 +16,7 @@ import { parseNameAndPath } from "./utils/parseNameAndPath.js";
 import { renderTitle } from "./utils/renderTitle.js";
 import { PackageJson } from "type-fest";
 import { getVersion } from "./utils/getT3Version.js";
+import { formatProject } from "./helpers/format.js";
 
 type CT3APackageJSON = PackageJson & {
   ct3aeMetadata?: {
@@ -55,6 +56,11 @@ const main = async () => {
   if (!cliResult.flags.noGit) {
     await initializeGit(projectDir);
   }
+
+  if (!cliResult.flags.noFormat) {
+    await formatProject(installOptions);
+  }
+
   logNextSteps({
     projectName: appDir,
     packages: cliResult.packages,
